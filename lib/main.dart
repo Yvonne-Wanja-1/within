@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'screens/sessions_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(const WithinApp());
 }
 
@@ -14,14 +14,15 @@ class WithinApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Remove the debug banner
       title: 'Within',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.light(
-          primary: const Color(0xFF6B9AC4),
-          secondary: const Color(0xFF97C1A9),
+          primary: Colors.blueAccent,
+          secondary: Colors.blueAccent.shade200,
           background: const Color(0xFFF8F9FA),
           surface: Colors.white,
           onBackground: const Color(0xFF2C3E50),
@@ -32,8 +33,8 @@ class WithinApp extends StatelessWidget {
         brightness: Brightness.dark,
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.dark(
-          primary: const Color(0xFF6B9AC4),
-          secondary: const Color(0xFF97C1A9),
+          primary: Colors.blueAccent,
+          secondary: Colors.blueAccent.shade200,
           background: const Color(0xFF121212),
           surface: const Color(0xFF1E1E1E),
           onBackground: Colors.white,
@@ -58,6 +59,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const SessionsScreen(),
     const SelfCareScreen(),
+    const HomeScreen(),
     const CommunityScreen(),
     const ProfileScreen(),
   ];
@@ -66,24 +68,24 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (int index) {
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.primary,
+        buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+        height: 60,
+        index: _selectedIndex,
+        onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.calendar_today),
-            label: 'Sessions',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.self_improvement),
-            label: 'Self-Care',
-          ),
-          NavigationDestination(icon: Icon(Icons.forum), label: 'Community'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        items: const [
+          Icon(Icons.calendar_today, color: Colors.white),
+          Icon(Icons.self_improvement, color: Colors.white),
+          Icon(Icons.home,
+              color: Colors.white, size: 30), // Made home icon slightly larger
+          Icon(Icons.forum, color: Colors.white),
+          Icon(Icons.person, color: Colors.white),
         ],
       ),
     );
@@ -91,15 +93,6 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 // Placeholder screens - These will be replaced with actual implementations
-class SessionsScreen extends StatelessWidget {
-  const SessionsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Sessions Screen'));
-  }
-}
-
 class SelfCareScreen extends StatelessWidget {
   const SelfCareScreen({super.key});
 
