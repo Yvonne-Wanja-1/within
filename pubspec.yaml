@@ -1,0 +1,49 @@
+name: within
+description: A therapeutic mental health application focusing on user wellbeing.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
+  cloud_firestore: ^4.9.1
+  firebase_messaging: ^14.6.7
+  provider: ^6.0.5
+  flutter_secure_storage: ^9.0.0
+  table_calendar: ^3.0.8
+  encrypt: ^5.0.1
+  flutter_local_notifications: ^15.1.1
+  shared_preferences: ^2.2.1
+  path_provider: ^2.1.1
+  flutter_markdown: ^0.6.17
+  fl_chart: ^0.63.0
+  flutter_sound: ^9.2.13
+  permission_handler: ^10.4.3
+  image_picker: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/audio/
+    
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
