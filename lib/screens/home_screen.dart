@@ -70,33 +70,37 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             ListView(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
               children: [
                 // Header Section
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Welcome back, Yvonne 👋",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF2D3748),
+                    Flexible(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Welcome back, Yvonne 👋",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2D3748),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "Your journey within continues today.",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF4A5568),
+                          const SizedBox(height: 4),
+                          Text(
+                            "Your journey within continues today.",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF4A5568),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 20),
                     CircleAvatar(
                       radius: 24,
                       backgroundColor: AppColors.primary,
@@ -178,39 +182,39 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // Quick Actions Row
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Row(
+                // Quick Actions Row (fixed for smooth scroll)
+                SizedBox(
+                  height: 120, // adjust to card height
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     children: [
                       QuickActionCard(
                         title: "Meditation",
                         icon: Icons.self_improvement,
-                        backgroundColor: const Color(
-                            0xFF9C27B0), // Deeper and brighter Purple
+                        backgroundColor: const Color(0xFF9C27B0),
                         onTap: () {},
                       ),
+                      const SizedBox(width: 16),
                       QuickActionCard(
                         title: "Journal Entry",
                         icon: Icons.edit_note,
-                        backgroundColor:
-                            const Color(0xFF00BCD4), // Deeper and brighter Cyan
+                        backgroundColor: const Color(0xFF00BCD4),
                         onTap: () {},
                       ),
+                      const SizedBox(width: 16),
                       QuickActionCard(
                         title: "Resources",
                         icon: Icons.menu_book,
-                        backgroundColor: const Color(
-                            0xFF4CAF50), // Deeper and brighter Green
+                        backgroundColor: const Color(0xFF4CAF50),
                         onTap: () {},
                       ),
+                      const SizedBox(width: 16),
                       QuickActionCard(
                         title: "Messages",
                         icon: Icons.message,
-                        backgroundColor: const Color(
-                            0xFF3F51B5), // Deeper and brighter Indigo
+                        backgroundColor: const Color(0xFF3F51B5),
                         onTap: () {},
                       ),
                     ],
@@ -231,7 +235,7 @@ class HomeScreen extends StatelessWidget {
                 const RecommendationCard(
                   title: "5-Minute Breathing Exercise",
                   tag: "Mindfulness",
-                  icon: Icons.air,
+                  icon: Icons.spa,
                 ),
                 const RecommendationCard(
                   title: "Daily Affirmation",
