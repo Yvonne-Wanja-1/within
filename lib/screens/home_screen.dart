@@ -181,30 +181,36 @@ class HomeScreen extends StatelessWidget {
                 // Quick Actions Row
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Row(
                     children: [
                       QuickActionCard(
                         title: "Meditation",
                         icon: Icons.self_improvement,
-                        backgroundColor: const Color(0xFF9C27B0), // Deep Purple
+                        backgroundColor: const Color(
+                            0xFF9C27B0), // Deeper and brighter Purple
                         onTap: () {},
                       ),
                       QuickActionCard(
                         title: "Journal Entry",
                         icon: Icons.edit_note,
-                        backgroundColor: const Color(0xFF00BCD4), // Deep Cyan
+                        backgroundColor:
+                            const Color(0xFF00BCD4), // Deeper and brighter Cyan
                         onTap: () {},
                       ),
                       QuickActionCard(
                         title: "Resources",
                         icon: Icons.menu_book,
-                        backgroundColor: const Color(0xFF4CAF50), // Deep Green
+                        backgroundColor: const Color(
+                            0xFF4CAF50), // Deeper and brighter Green
                         onTap: () {},
                       ),
                       QuickActionCard(
                         title: "Messages",
                         icon: Icons.message,
-                        backgroundColor: const Color(0xFF3F51B5), // Deep Indigo
+                        backgroundColor: const Color(
+                            0xFF3F51B5), // Deeper and brighter Indigo
                         onTap: () {},
                       ),
                     ],
