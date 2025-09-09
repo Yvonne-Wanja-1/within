@@ -11,8 +11,15 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.primaryLight,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        shape: CircleBorder(
+          side: BorderSide(
+            color: AppColors.primary,
+            width: 2,
+          ),
+        ),
+        child: Icon(Icons.add, color: AppColors.primary, size: 28),
       ),
       body: SafeArea(
         child: Stack(
@@ -165,6 +172,8 @@ class HomeScreen extends StatelessWidget {
                             horizontal: 32,
                             vertical: 16,
                           ),
+                          elevation: 4,
+                          shadowColor: AppColors.primary.withOpacity(0.3),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -252,9 +261,10 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 25,
+                        offset: const Offset(0, 10),
+                        spreadRadius: 6,
                       ),
                     ],
                   ),
@@ -276,12 +286,13 @@ class HomeScreen extends StatelessWidget {
                             style: TextStyle(
                               color: AppColors.primary,
                               fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(width: 16),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -290,13 +301,14 @@ class HomeScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
+                                color: AppColors.textDark,
                               ),
                             ),
                             SizedBox(height: 4),
                             Text(
                               "Keep going! You're doing great.",
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: AppColors.textGray,
                                 fontSize: 14,
                               ),
                             ),
