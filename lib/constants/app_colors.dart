@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Main colors
-  static const primary = Color(0xFF6C5CE7); // Deep purple
-  static const secondary = Color(0xFFa8e6cf); // Mint green
-  static const accent = Color(0xFFfdcb6e); // Warm yellow
+  static const primary = Colors.blueAccent; // Main blue
+  static const secondary = Color(0xFF64B5F6); // Lighter blue
+  static const accent = Color(0xFF82B1FF); // Very light blue
 
   // Light variations
-  static const primaryLight = Color(0xFFE7E4F9); // Light purple
-  static const secondaryLight = Color(0xFFE8F7F2); // Light mint
-  static const accentLight = Color(0xFFFFF3E0); // Light yellow
+  static const primaryLight = Color(0xFFE3F2FD); // Light blue
+  static const secondaryLight = Color(0xFFBBDEFB); // Very light blue
+  static const accentLight = Color(0xFFF5F9FF); // Almost white blue
 
   // Text colors
   static const textDark = Color(0xFF2D3436); // Almost black
@@ -20,8 +20,8 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFF6C5CE7), // Deep purple
-      Color(0xFF8E7CF3), // Lighter purple
+      Colors.blueAccent, // Main blue
+      Color(0xFF448AFF), // Deeper blue accent
     ],
   );
 
@@ -29,8 +29,8 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFFa8e6cf), // Mint
-      Color(0xFF6C5CE7), // Deep purple
+      Colors.blueAccent, // Main blue
+      Color(0xFF2979FF), // Darker blue accent
     ],
   );
 }
