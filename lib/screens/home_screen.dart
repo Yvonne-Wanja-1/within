@@ -77,6 +77,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             ListView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
+              ),
               padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
               children: [
                 // Header Section

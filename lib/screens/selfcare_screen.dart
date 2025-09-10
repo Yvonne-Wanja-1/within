@@ -27,6 +27,9 @@ class SelfCareScreen extends StatelessWidget {
               ),
             ),
             CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
+              ),
               slivers: [
                 // App Bar
                 SliverToBoxAdapter(
