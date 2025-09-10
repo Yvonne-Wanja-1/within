@@ -77,37 +77,31 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _screens[_selectedIndex],
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          extendBody: true,
-          body: Container(),
-          bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: Colors.transparent,
-            color: Colors.blueAccent,
-            buttonBackgroundColor: Colors.blueAccent,
-            animationDuration: const Duration(milliseconds: 300),
-            height: 60,
-            index: _selectedIndex,
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            items: const [
-              Icon(Icons.calendar_today, color: Colors.white),
-              Icon(Icons.self_improvement, color: Colors.white),
-              Icon(Icons.home,
-                  color: Colors.white,
-                  size: 30), // Made home icon slightly larger
-              Icon(Icons.forum, color: Colors.white),
-              Icon(Icons.person, color: Colors.white),
-            ],
-          ),
-        ),
-      ],
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      extendBody: true,
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: Colors.blueAccent,
+        buttonBackgroundColor: Colors.blueAccent,
+        animationDuration: const Duration(milliseconds: 300),
+        height: 60,
+        index: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const [
+          Icon(Icons.calendar_today, color: Colors.white),
+          Icon(Icons.self_improvement, color: Colors.white),
+          Icon(Icons.home,
+              color: Colors.white, size: 30), // Made home icon slightly larger
+          Icon(Icons.forum, color: Colors.white),
+          Icon(Icons.person, color: Colors.white),
+        ],
+      ),
     );
   }
 }

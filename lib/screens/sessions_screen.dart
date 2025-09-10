@@ -27,6 +27,9 @@ class SessionsScreen extends StatelessWidget {
             ),
           ),
           CustomScrollView(
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
             slivers: [
               SliverToBoxAdapter(
                 child: _buildHeader(),

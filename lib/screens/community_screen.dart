@@ -6,28 +6,36 @@ class CommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Background gradient
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    AppColors.primaryLight,
-                    AppColors.secondaryLight,
-                    const Color(0xFFFFFFFF),
-                  ],
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            AppColors.primaryLight,
+            AppColors.secondaryLight,
+            const Color(0xFFFFFFFF),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Implement new post creation
+          },
+          backgroundColor: AppColors.primary,
+          child: const Icon(Icons.add, color: Colors.white),
+        ),
+        body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              // Add refresh functionality here
+            },
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
               ),
-            ),
-            CustomScrollView(
               slivers: [
                 // App Bar
                 SliverToBoxAdapter(
@@ -207,31 +215,42 @@ class CommunityScreen extends StatelessWidget {
 
                 // Support Groups List
                 SliverToBoxAdapter(
-                  child: SizedBox(
+                  child: Container(
                     height: 180,
-                    child: ListView(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      children: [
-                        _buildSupportGroupCard(
-                          'Anxiety Support',
-                          '32 members',
-                          Icons.psychology,
-                          const Color(0xFFFF6B6B), // Vibrant Coral
-                        ),
-                        _buildSupportGroupCard(
-                          'Depression Support',
-                          '45 members',
-                          Icons.favorite,
-                          const Color(0xFF4ECDC4), // Turquoise
-                        ),
-                        _buildSupportGroupCard(
-                          'Stress Management',
-                          '28 members',
-                          Icons.spa,
-                          const Color(0xFF7C4DFF), // Vibrant Purple
-                        ),
-                      ],
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        final items = [
+                          (
+                            'Anxiety Support',
+                            '32 members',
+                            Icons.psychology,
+                            const Color(0xFFFF6B6B)
+                          ),
+                          (
+                            'Depression Support',
+                            '45 members',
+                            Icons.favorite,
+                            const Color(0xFF4ECDC4)
+                          ),
+                          (
+                            'Stress Management',
+                            '28 members',
+                            Icons.spa,
+                            const Color(0xFF7C4DFF)
+                          ),
+                        ];
+                        return _buildSupportGroupCard(
+                          items[index].$1,
+                          items[index].$2,
+                          items[index].$3,
+                          items[index].$4,
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -269,171 +288,171 @@ class CommunityScreen extends StatelessWidget {
                 ),
 
                 // Recent Discussions List
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    _buildDiscussionCard(
-                      'Self-Care Tips',
-                      'Share your daily self-care routines and tips',
-                      '15 comments',
-                      '2h ago',
-                    ),
-                    _buildDiscussionCard(
-                      'Meditation Experiences',
-                      'Let\'s discuss our meditation journeys',
-                      '23 comments',
-                      '4h ago',
-                    ),
-                    _buildDiscussionCard(
-                      'Weekly Gratitude',
-                      'What are you grateful for this week?',
-                      '42 comments',
-                      '6h ago',
-                    ),
-                    const SizedBox(height: 32),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      _buildDiscussionCard(
+                        'Self-Care Tips',
+                        'Share your daily self-care routines and tips',
+                        '15 comments',
+                        '2h ago',
+                      ),
+                      _buildDiscussionCard(
+                        'Meditation Experiences',
+                        'Let\'s discuss our meditation journeys',
+                        '23 comments',
+                        '4h ago',
+                      ),
+                      _buildDiscussionCard(
+                        'Weekly Gratitude',
+                        'What are you grateful for this week?',
+                        '42 comments',
+                        '6h ago',
+                      ),
+                    ]),
+                  ),
+                ),
 
-                    // Daily Challenge Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Card(
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.blue[400]!,
-                                Colors.blue[300]!,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.stars,
-                                      color: Colors.yellow[600], size: 24),
-                                  const SizedBox(width: 8),
-                                  const Text(
-                                    'Daily Challenge',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              const Text(
-                                'Share one thing that made you smile today',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 6,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: const Text(
-                                      '47 people participated today',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  TextButton.icon(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.add_circle_outline,
-                                        color: Colors.white),
-                                    label: const Text(
-                                      'Participate',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    style: TextButton.styleFrom(
-                                      backgroundColor: Colors.white24,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                // Daily Challenge Section
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+                    child: Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.blue[400]!,
+                              Colors.blue[300]!,
                             ],
                           ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.stars,
+                                    color: Colors.yellow[600], size: 24),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  'Daily Challenge',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Share one thing that made you smile today',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: const Text(
+                                    '47 people participated today',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.add_circle_outline,
+                                      color: Colors.white),
+                                  label: const Text(
+                                    'Participate',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.white24,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
+                  ),
+                ),
 
-                    const SizedBox(height: 32),
-
-                    // Community Events
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Upcoming Community Events',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          _buildEventCard(
-                            'Group Meditation Session',
-                            'Tomorrow, 10:00 AM',
-                            '32 attending',
-                            Icons.self_improvement,
-                          ),
-                          _buildEventCard(
-                            'Art Therapy Workshop',
-                            'Sep 11, 2:00 PM',
-                            '18 attending',
-                            Icons.palette,
-                          ),
-                          _buildEventCard(
-                            'Stress Management Webinar',
-                            'Sep 12, 4:00 PM',
-                            '45 attending',
-                            Icons.psychology,
-                          ),
-                        ],
+                // Community Events Header
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+                    child: Text(
+                      'Upcoming Community Events',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 20), // Bottom padding
-                  ]),
+                  ),
+                ),
+
+                // Community Events List
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      _buildEventCard(
+                        'Group Meditation Session',
+                        'Tomorrow, 10:00 AM',
+                        '32 attending',
+                        Icons.self_improvement,
+                      ),
+                      _buildEventCard(
+                        'Art Therapy Workshop',
+                        'Sep 11, 2:00 PM',
+                        '18 attending',
+                        Icons.palette,
+                      ),
+                      _buildEventCard(
+                        'Stress Management Webinar',
+                        'Sep 12, 4:00 PM',
+                        '45 attending',
+                        Icons.psychology,
+                      ),
+                      const SizedBox(height: 32),
+                    ]),
+                  ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Implement new post creation
-        },
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -580,7 +599,7 @@ class CommunityScreen extends StatelessWidget {
     String timeAgo,
   ) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      padding: const EdgeInsets.all(0),
       child: Card(
         elevation: 2,
         shadowColor: Colors.black.withOpacity(0.1),

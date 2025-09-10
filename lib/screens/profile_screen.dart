@@ -27,6 +27,9 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
+              ),
               slivers: [
                 // Profile Header
                 SliverToBoxAdapter(
